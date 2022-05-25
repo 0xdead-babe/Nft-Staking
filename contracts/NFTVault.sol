@@ -78,6 +78,7 @@ contract NftVault is IERC721Receiver
     {
         uint tokenId;
         uint earned;
+        address  recipient;
 
         for(uint i=0;i<tokenIds.length;i++)
         {
@@ -88,13 +89,9 @@ contract NftVault is IERC721Receiver
             require(stake.owner == msg.sender, "You can't claim reward for NFT that you don't own");
 
             uint256 stakedTime = stake.timeStamp;
-            earned += 1000 ether * (block.timestamp - stakedTime) / 1 days;
-
-            if(earned > 0)
-            {
-                meowToken.transfer(msg.sender, earned);
-            }
+            earned += 10000  * (block.timestamp - stakedTime) / 1 days;
         }
+        meowToken.transfer(msg.sender, earned);
     }
 
 

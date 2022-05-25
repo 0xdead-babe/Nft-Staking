@@ -9,7 +9,7 @@ contract NftCollection is ERC721Enumerable
     string public baseURI;
     address public owner;
     uint24 public immutable MAX_SUPPLY = 5500;
-    uint256 public immutable MINT_FEE = 10000000000000000 wei; 
+    uint256 public immutable MINT_FEE = 0.01 ether; 
     uint256 public maxMintAmount = 5;
     bool public isPaused;
 
@@ -30,10 +30,10 @@ contract NftCollection is ERC721Enumerable
     function mint(uint _count) external payable{
         
         uint supply = totalSupply();
-        require(!isPaused);
+        require(!isPaused, "Minting is paused");
         require(msg.value == MINT_FEE);
         require(_count > 0);
-        require(_count <= maxMintAmount);
+        require(_count <= maxMintAmount, "You can't mint more than 5 token in single tx");
         require(supply + _count <= MAX_SUPPLY);
 
         for(uint i=1; i<=_count; i++)

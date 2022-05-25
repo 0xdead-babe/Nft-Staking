@@ -5,7 +5,7 @@ import "hardhat/console.sol";
 import "./NftCollection.sol";
 import "./MeowToken.sol";
 
-contract NftValut is IERC721Receiver
+contract NftVault is IERC721Receiver
 {
     NftCollection nftCollection;
     MeowToken meowToken;
